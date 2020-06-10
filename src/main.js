@@ -4,9 +4,11 @@ import App from './App.vue'
 import './plugins/element.js'
 import router from './router'
 import VueTouch from 'vue-touch'
+import VueCookies from 'vue-cookies'
 Vue.use(VueTouch, {
   name: 'v-touch'
 })
+Vue.use(VueCookies)
 // VueTouch.config.swpie = {
 //   threshold: 100
 // }

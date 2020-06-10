@@ -266,19 +266,6 @@ export default {
   mounted () {
 
     console.log("初始化数据")
-    this.axios
-      .post('http://127.0.0.1:2048/user/login', { username: 'xiaozhou', password: "xiaozhou" })
-      .then(function (response) {
-        if (response.data != null) {
-          // let data = JSON.stringify(response.data.data)
-          this.username = response.data.data.username
-        }
-        console.log("username" + this.username)
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
 
   },
   components: {
