@@ -45,7 +45,8 @@ export default {
       highestScore: 0,
       recentScores: [],
       username: "",
-      popup: 0
+      popup: 0,
+      dateStr: ""
     };
   },
   methods: {
@@ -104,6 +105,14 @@ export default {
           if (this.highestScore < this.score) {
             this.highestScore = this.score
           }
+          // eslint-disable-next-line no-debugger
+// debugger          
+let date = new Date();
+          this.dateStr =  date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " 
+      + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+          var nickName = this.$route.query.nickName
+          this.axios.post('/rank/addHistoryRank', {nickName: nickName, score: this.score, createTime: '20200610'})
+
           this.restart();
         }
       }

@@ -42,6 +42,8 @@ export default {
           if (response.data != null) {
             _this.user.username = response.data.data.username
             _this.user.nickName = response.data.data.nickName
+            alert("登录成功")
+            _this.$router.push({path:'/gameBoard', query:{nickName:_this.user.nickName}})
           }
           console.log(response)
           console.log(_this.$cookies.set("token", response.data.data.token))
