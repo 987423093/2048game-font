@@ -19,16 +19,6 @@
             :index="index">{{item}}<br></span>
         </div>
       </div>
-      <div class="pop">
-        <p class="login" @click="showpopup">登录</p>
-      </div>
-      <div v-show="popup">
-        <input type="text" placeholder="请输入您的用户名">
-        <input type="text" placeholder="请输入您的密码">
-        <button @click="closepopup">登录</button>
-        <button @click="closepopup">取消</button>
-      </div>
-
     </div>
   </v-touch>
 </template>
@@ -105,13 +95,11 @@ export default {
           if (this.highestScore < this.score) {
             this.highestScore = this.score
           }
-          // eslint-disable-next-line no-debugger
-// debugger          
-let date = new Date();
-          this.dateStr =  date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " " 
-      + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-          var nickName = this.$route.query.nickName
-          this.axios.post('/rank/addHistoryRank', {nickName: nickName, score: this.score, createTime: '20200610'})
+
+          let date = new Date();
+          this.dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " "
+            + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+          this.axios.post('/rank/addHistoryRank', { nickName: sessionStorage.getItem("nickName"), score: this.score, createTime: this.dateStr })
 
           this.restart();
         }
@@ -142,6 +130,7 @@ let date = new Date();
       //   this.addBtnClass(direction);
       this.$forceUpdate();
       this.addCells();
+      this.$forceUpdate();
 
     },
     restart () {
@@ -274,6 +263,7 @@ let date = new Date();
   },
   mounted () {
 
+    // alert(this.$route.query.nickName)
     console.log("初始化数据")
 
   },

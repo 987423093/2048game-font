@@ -4,6 +4,9 @@ import Home from '../views/Home.vue'
 import GameBoard from '../views/GameBoard'
 import Rank from '../views/Rank'
 import Login from '../views/Login'
+import Register from '../views/Register'
+import RegisterSuccess from '../views/RegisterSuccess'
+import LoginSuccess from '../views/LoginSuccess'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -21,6 +24,11 @@ const routes = [{
     //component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+  {
     path: '/gameBoard',
     name: 'GameBoard',
     component: GameBoard
@@ -29,6 +37,16 @@ const routes = [{
     path: '/rank',
     name: 'Rank',
     component: Rank
+  },
+  {
+    path: '/registerSuccess',
+    name: 'RegisterSuccess',
+    component: RegisterSuccess
+  },
+  {
+    path: '/loginSuccess',
+    name: 'LoginSuccess',
+    component: LoginSuccess
   }
 ]
 
