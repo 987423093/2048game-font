@@ -5,18 +5,17 @@ import GameBoard from '../views/GameBoard'
 import Rank from '../views/Rank'
 import Login from '../views/Login'
 import Register from '../views/Register'
-import RegisterSuccess from '../views/RegisterSuccess'
-import LoginSuccess from '../views/LoginSuccess'
+import UserInfo from '../views/UserInfo'
 Vue.use(VueRouter)
 
 const routes = [{
     path: '/',
-    name: 'Home',
+    name: '首页',
     component: Home
   },
   {
     path: '/login',
-    name: 'Login',
+    name: '登录',
     component: Login
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -25,28 +24,23 @@ const routes = [{
   },
   {
     path: '/register',
-    name: 'Register',
+    name: '注册',
     component: Register
   },
   {
     path: '/gameBoard',
-    name: 'GameBoard',
+    name: '2048小游戏',
     component: GameBoard
   },
   {
     path: '/rank',
-    name: 'Rank',
+    name: '排行榜',
     component: Rank
   },
   {
-    path: '/registerSuccess',
-    name: 'RegisterSuccess',
-    component: RegisterSuccess
-  },
-  {
-    path: '/loginSuccess',
-    name: 'LoginSuccess',
-    component: LoginSuccess
+    path: '/userInfo',
+    name: '用户中心',
+    component: UserInfo
   }
 ]
 

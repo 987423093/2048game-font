@@ -1,26 +1,28 @@
 <template>
-
+<div>
+  <div class="tools">
+        <!-- <h3 class="welcomeText" style="text-align: center;">Welcome to 2048!</h3> -->
+        <div class="scores">
+          <div class="score">
+            <div>最高得分</div>
+              <div>{{highestScore}}</div>
+          </div>
+          <div class="score">
+              <div>当前得分</div>
+              <div>{{score}}</div>
+          </div>    
+        </div>
+      </div>
   <v-touch class="wrapper" v-on:swipeleft="move('ArrowLeft')" v-on:swiperight="move('ArrowRight')"
     v-on:swipeup="move('ArrowUp')" v-on:swipedown="move('ArrowDown')">
     <div class="game">
       <div class="board">
         <GameCell :number="cell" v-for="(cell,key) in cells" :key="key"></GameCell>
       </div>
-      <div class="tools">
-        <h3 class="welcomeText" style="text-align: center;">Welcome to 2048!</h3>
-        <div class="info">
-          <p class="welcomeText">你的比分</p>
-          <p class="welcomeText">当前得分: {{score}}</p>
-          <p class="welcomeText">最高得分: {{highestScore}}</p>
-        </div>
-        <div class="recent">
-          <p class="welcomeText">最近记录</p>
-          <span class="recentScoreFont" v-for="(item, index) in recentScores" :key="item"
-            :index="index">{{item}}<br></span>
-        </div>
-      </div>
+      
     </div>
   </v-touch>
+</div>
 </template>
 
 <script>
@@ -255,6 +257,9 @@ export default {
         }
         //最后合并一次对齐
       }
+    },
+    jumpHome () {
+      this.$router.push({ path: '/' })
     }
   },
   created () {
@@ -295,12 +300,12 @@ export default {
 }
 
 .tools {
-  height: 200px;
+  height: 50px;
   width: 360px;
   padding: 6px;
   display: inline-block;
   /* margin: 10px; */
-  background-color: #d0d6da;
+  background-color: white;
   border-radius: 8px;
   position: relative;
   padding-top: 10px;
@@ -354,4 +359,17 @@ export default {
   padding: 5px;
   background-color: #d0d6da;
 }
+
+.score {
+  float:right;
+  margin:5px;
+  background-color: #409eff;
+  margin: 5px;
+  border: 5px solid #409eff;
+  border-radius: 5px;
+  color: white;
+  opacity: 0.6;
+}
+
+
 </style>

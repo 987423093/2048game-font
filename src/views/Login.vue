@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>登录</el-header>
+    <!-- <el-header>登录</el-header> -->
     <el-main>
       <el-form :model="form">
         <el-form-item>
@@ -55,17 +55,18 @@ export default {
           if (0 == response.data.code) {
             _this.user.username = response.data.data.username
             _this.user.nickName = response.data.data.nickName
-            _this.toast("登录成功,准备跳转")
+            _this.toast("登录成功")
             sessionStorage.setItem("nickName", _this.user.nickName)
+            _this.$cookies.set('token', response.data.data.token)
             setTimeout(() => {
-              _this.$router.push({ path: '/gameBoard', query: { nickName: _this.user.nickName } })
+              _this.$router.push({ path: '/'})
             }, 1500);
 
           } else {
             _this.toast(response.data.message)
           }
-          console.log(response)
-          console.log(_this.$cookies.set("token", response.data.data.token))
+          // console.log(response)
+          // _this.$cookies.set("token", response.data.data.token)
         })
         .catch(function (error) {
           console.log(error);

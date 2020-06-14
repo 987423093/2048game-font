@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>注册</el-header>
+    <!-- <el-header>注册</el-header> -->
     <el-main>
       <el-form :model="form" :rules="rules" ref="form">
         <el-form-item prop="username">

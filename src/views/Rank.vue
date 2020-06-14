@@ -1,17 +1,21 @@
 <template>
   <el-container>
-    <el-header>排行榜</el-header>
+    <!-- <el-header>排行榜</el-header> -->
     <el-main>
-      <!-- <el-table :data="rankList" style="width: 100%">
-        <el-table-column  prop="score" label="得分">
-        </el-table-column>
-        <el-table-column prop="nickName" label="昵称">
-        </el-table-column>
-        <el-table-column prop="createTime" label="创建记录">
-        </el-table-column>
-      </el-table> -->
+      <div class="rankTitle">
+        <div class="rankContent">排名</div>
+        <div class="rankContent">玩家昵称</div>
+        <div class="rankContent">得分</div>
+        <div class="rankContent">游戏时间</div>
+      </div>      
       <div class = "rankList" v-for="(item, index) in rankList" :key="index">
-          {{index + 1}}  {{item.nickName}} {{item.score}}  {{item.createTime}}
+        <div class="valueContent">
+          <div class="rankNo">{{index + 1}}</div>
+          <div class="nickName">{{item.nickName}}</div>
+          <div class="scoreValue">{{item.score}} </div>
+          <div class="createTime">{{item.createTime}}</div>
+          <br/>
+        </div>
       </div>
     </el-main>
   </el-container>
@@ -54,7 +58,42 @@ export default {
 
 <style>
 .rankList {
-  align-content: center;
+  /* align-content: center; */
+}
+
+.rankContent {
+  float: left;
+  margin: 15px;
+  color: #409EFF;
+}
+.rankList {
+  float: left;
+  color: #409EFF;
+  margin: 5px;
+}
+.rankNo {
+  float: left;
+  width: 60px;
+  color:  black
+}
+.nickName {
+  float: left;
+  width: 80px;
+  color:  black
+}
+.scoreValue {
+  float: left;
+  width: 80px;
+  color:  black
+}
+.createTime {
+  float: left;
+  width: 80px;
+  font-size: 10px;
+  color:  black
+}
+.valueContent {
+  height: 30px;
 }
 
 </style>
