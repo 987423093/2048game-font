@@ -12,6 +12,7 @@ let config = {
   headers: {
     'Content-Type': "application/json;charset=UTF-8"
   },
+  baseURL: 'http://www.xinyuzang.com'
   // baseURL: 'http://127.0.0.1:2048'
   // baseURL: 'http://122.51.211.176:2048'
   // baseURL: process.env.baseURL || process.env.apiUrl || ""

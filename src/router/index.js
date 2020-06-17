@@ -6,6 +6,7 @@ import Rank from '../views/Rank'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import UserInfo from '../views/UserInfo'
+import BillList from '../views/BillList'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -17,10 +18,6 @@ const routes = [{
     path: '/login',
     name: '登录',
     component: Login
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    //component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
     path: '/register',
@@ -41,6 +38,11 @@ const routes = [{
     path: '/userInfo',
     name: '用户中心',
     component: UserInfo
+  },
+  {
+    path: '/billList',
+    name: '账单列表',
+    component: BillList
   }
 ]
 
