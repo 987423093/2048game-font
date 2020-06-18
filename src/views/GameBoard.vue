@@ -1,28 +1,37 @@
 <template>
-<div>
-  <div class="tools">
-        <!-- <h3 class="welcomeText" style="text-align: center;">Welcome to 2048!</h3> -->
-        <div class="scores">
-          <div class="score">
-            <div>最高得分</div>
-              <div>{{highestScore}}</div>
-          </div>
-          <div class="score">
-              <div>当前得分</div>
-              <div>{{score}}</div>
-          </div>    
+  <div>
+    <div class="tools">
+      <!-- <h3 class="welcomeText" style="text-align: center;">Welcome to 2048!</h3> -->
+      <div class="scores">
+        <div class="score">
+          <div>最高得分</div>
+          <div>{{highestScore}}</div>
+        </div>
+        <div class="score">
+          <div>当前得分</div>
+          <div>{{score}}</div>
         </div>
       </div>
-  <v-touch class="wrapper" v-on:swipeleft="move('ArrowLeft')" v-on:swiperight="move('ArrowRight')"
-    v-on:swipeup="move('ArrowUp')" v-on:swipedown="move('ArrowDown')">
-    <div class="game">
-      <div class="board">
-        <GameCell :number="cell" v-for="(cell,key) in cells" :key="key"></GameCell>
-      </div>
-      
     </div>
-  </v-touch>
-</div>
+    <v-touch
+      class="wrapper"
+      v-on:swipeleft="move('ArrowLeft')"
+      v-on:swiperight="move('ArrowRight')"
+      v-on:swipeup="move('ArrowUp')"
+      v-on:swipedown="move('ArrowDown')"
+    >
+      <div class="game">
+        <div class="board">
+          <GameCell :number="cell" v-for="(cell,key) in cells" :key="key"></GameCell>
+        </div>
+      </div>
+    </v-touch>
+    <div class="rankInfo" @click="jumpRank()">
+      排行榜
+      <!-- <el-button type="primary" size="mini"></el-button> -->
+    </div>
+    <div style="color:#409eff">注：登陆后完成游戏可以记录到排行榜哦！</div>
+  </div>
 </template>
 
 <script>
@@ -30,7 +39,7 @@ import GameCell from "./GameCell";
 
 export default {
   name: "GameBoard",
-  data () {
+  data() {
     return {
       cells: [],
       score: 0,
@@ -42,29 +51,43 @@ export default {
     };
   },
   methods: {
-
-    showpopup () {
-      this.popup = 1
+    jumpRank() {
+      this.$router.push({ path: "/rank" });
     },
-    closepopup () {
+    showpopup() {
+      this.popup = 1;
+    },
+    closepopup() {
       this.popup = 0;
     },
-    init () {
+    init() {
       this.cells = this.shuffle([
-        2, 2, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0,
-        0, 0, 0, 0
+        2,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
       ]);
     },
-    shuffle (arr) {
+    shuffle(arr) {
       for (let i = 0; i <= arr.length - 1; i++) {
         let j = Math.floor(Math.random() * i);
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
       return arr;
     },
-    addCells () {
+    addCells() {
       let emptyCells = [];
       this.cells.forEach((cell, index) => {
         if (cell === 0) {
@@ -78,7 +101,14 @@ export default {
         let turns = false;
         for (let i = 0; i < 16; i++) {
           if (this.checkTurns(i)) {
-            console.log(i, this.cells[i], this.cells[i + 1], this.cells[i - 1], this.cells[i + 4], this.cells[i - 4])
+            console.log(
+              i,
+              this.cells[i],
+              this.cells[i + 1],
+              this.cells[i - 1],
+              this.cells[i + 4],
+              this.cells[i - 4]
+            );
             turns = true;
             break;
           }
@@ -95,19 +125,33 @@ export default {
           }
           alert("Game Over!");
           if (this.highestScore < this.score) {
-            this.highestScore = this.score
+            this.highestScore = this.score;
           }
 
           let date = new Date();
-          this.dateStr = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " "
-            + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
-          this.axios.post('/rank/addHistoryRank', { nickName: sessionStorage.getItem("nickName"), score: this.score, createTime: this.dateStr })
+          this.dateStr =
+            date.getFullYear() +
+            "-" +
+            (date.getMonth() + 1) +
+            "-" +
+            date.getDate() +
+            " " +
+            date.getHours() +
+            ":" +
+            date.getMinutes() +
+            ":" +
+            date.getSeconds();
+          this.axios.post("/rank/addHistoryRank", {
+            nickName: sessionStorage.getItem("nickName"),
+            score: this.score,
+            createTime: this.dateStr
+          });
 
           this.restart();
         }
       }
     },
-    checkTurns (i) {
+    checkTurns(i) {
       let v = this.cells[i];
       return (
         (v === this.cells[i + 1] && i % 4 != 3) ||
@@ -116,7 +160,7 @@ export default {
         v === this.cells[i - 4]
       );
     },
-    onkeydown (e) {
+    onkeydown(e) {
       if (
         ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.code)
       ) {
@@ -124,7 +168,7 @@ export default {
         this.move(e.code);
       }
     },
-    move (direction) {
+    move(direction) {
       //console.log('move' + direction)
       for (let k = 1; k <= 4; k++) {
         this[direction](k);
@@ -133,28 +177,37 @@ export default {
       this.$forceUpdate();
       this.addCells();
       this.$forceUpdate();
-
     },
-    restart () {
+    restart() {
       var date = new Date();
-      var time = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + "-"
-        + date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds();
+      var time =
+        date.getFullYear() +
+        "-" +
+        (date.getMonth() + 1) +
+        "-" +
+        date.getDate() +
+        "-" +
+        date.getHours() +
+        "-" +
+        date.getMinutes() +
+        "-" +
+        date.getSeconds();
       this.recentScores.push(time + " " + this.score);
       if (this.recentScores.length > 5) {
         this.recentScores.shift();
       }
 
-      this.init()
-      this.score = 0
+      this.init();
+      this.score = 0;
     },
     //?
-    addBtnClass (direction) {
+    addBtnClass(direction) {
       let btn = document.getElementById(direction);
       btn.className += " effect effect-before";
       setTimeout(() => (btn.className = ""), 200);
     },
     //左移
-    ArrowLeft (k) {
+    ArrowLeft(k) {
       //   debugger;
       for (let i = 0; i <= 15; i++) {
         //前面一个数
@@ -181,7 +234,7 @@ export default {
       //最后合并一次对齐
     },
     //右移
-    ArrowRight (k) {
+    ArrowRight(k) {
       for (let i = 15; i >= 0; i--) {
         //右边一个数
         let index = i + 1;
@@ -207,7 +260,7 @@ export default {
       }
     },
     //上移
-    ArrowUp (k) {
+    ArrowUp(k) {
       for (let i = 0; i <= 15; i++) {
         //上面一个数
         let index = i - 4;
@@ -233,7 +286,7 @@ export default {
       }
     },
     //下移
-    ArrowDown (k) {
+    ArrowDown(k) {
       for (let i = 15; i >= 0; i--) {
         //下面一个数
         let index = i + 4;
@@ -258,19 +311,17 @@ export default {
         //最后合并一次对齐
       }
     },
-    jumpHome () {
-      this.$router.push({ path: '/' })
+    jumpHome() {
+      this.$router.push({ path: "/" });
     }
   },
-  created () {
+  created() {
     this.init();
     window.addEventListener("keydown", this.onkeydown);
   },
-  mounted () {
-
+  mounted() {
     // alert(this.$route.query.nickName)
-    console.log("初始化数据")
-
+    console.log("初始化数据");
   },
   components: {
     GameCell
@@ -361,8 +412,8 @@ export default {
 }
 
 .score {
-  float:right;
-  margin:5px;
+  float: left;
+  margin: 5px;
   background-color: #409eff;
   margin: 5px;
   border: 5px solid #409eff;
@@ -371,5 +422,19 @@ export default {
   opacity: 0.6;
 }
 
-
+.rankInfo {
+  /* float: right; */
+  margin: 5px;
+  background-color: #409eff;
+  margin: 5px;
+  border: 5px solid #409eff;
+  border-radius: 5px;
+  color: white;
+  opacity: 0.6;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

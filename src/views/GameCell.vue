@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-  name: 'GameCell',
+  name: "GameCell",
   methods: {},
   props: {
     number: {
@@ -11,7 +11,7 @@ export default {
       default: 0
     }
   }
-}
+};
 </script>
 
 <style>

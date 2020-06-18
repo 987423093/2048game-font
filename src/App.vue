@@ -2,8 +2,8 @@
   <div id="app">
     <!-- <el-header> -->
     <div class="header">
-      <div class="back" @click="back()" v-show="isShow">返回</div>
-      <div class="pageName"> {{this.$route.name}}</div>
+      <span class="back" @click="back()" v-show="isShow">返回</span>
+      <span class="pageName">{{this.$route.name}}</span>
     </div>
     <!-- </el-header> -->
     <router-view />
@@ -11,35 +11,36 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       isShow: false,
       isHomeShow: false
-    }
+    };
   },
-  created () {
-    this.$router.push({ path: '/' })
+  created() {
+    this.$router.push({ path: "/" });
   },
   methods: {
-     back(){
-        this.$router.go(-1);//返回上一层
+    back() {
+      this.$router.go(-1); //返回上一层
     },
     jumpHome() {
-        this.$router.push({path : "/"})
+      this.$router.push({ path: "/" });
     }
   },
-  watch:{
-    $route(now){     //监控路由变换，控制返回按钮的显示
-    // eslint-disable-next-line no-debugger
-    // debugger
-     if (now.path == "/"){
+  watch: {
+    $route(now) {
+      //监控路由变换，控制返回按钮的显示
+      // eslint-disable-next-line no-debugger
+      // debugger
+      if (now.path == "/") {
         this.isShow = false;
-     } else {
+      } else {
         this.isShow = true;
-     }
+      }
     }
-}
-}
+  }
+};
 </script>
 <style>
 #app {
@@ -69,20 +70,23 @@ export default {
 
 .header {
   color: #409eff;
- font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    height: 40px;
+  height: 40px;
+  position: relative;
 }
 .el-header {
- color: #409eff;
- font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+  color: #409eff;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 .back {
-  float: left;
+  text-align: left;
+  position: absolute;
+  left: 5px;
 }
 .pageName {
-  float: none;
+  text-align: center;
 }
 .toast {
   position: fixed;

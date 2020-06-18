@@ -15,68 +15,68 @@
         </el-form-item>
       </el-form>
     </el-main>
-    <div class="toast" v-show="toastShow">
-      {{toastText}}
-    </div>
+    <div class="toast" v-show="toastShow">{{toastText}}</div>
   </el-container>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       form: {
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       },
       user: {
-        username: '',
-        nickName: ''
+        username: "",
+        nickName: ""
       },
       toastShow: false,
-      toastText: ''
-    }
+      toastText: ""
+    };
   },
   methods: {
-    toast (str) {
-      let v = this
-      v.toastText = str
-      v.toastShow = true
-      setTimeout(function () {
-        v.toastShow = false
-      }, 1500)
+    toast(str) {
+      let v = this;
+      v.toastText = str;
+      v.toastShow = true;
+      setTimeout(function() {
+        v.toastShow = false;
+      }, 1500);
     },
-    submitLogin (form) {
+    submitLogin(form) {
       let _this = this;
-      console.log('开始登录')
+      console.log("开始登录");
       this.axios
-        .post('/user/login', { username: form.username, password: form.password })
-        .then(function (response) {
+        .post("/user/login", {
+          username: form.username,
+          password: form.password
+        })
+        .then(function(response) {
           if (0 == response.data.code) {
-            _this.user.username = response.data.data.username
-            _this.user.nickName = response.data.data.nickName
-            _this.toast("登录成功")
-            sessionStorage.setItem("nickName", _this.user.nickName)
-            _this.$cookies.set('token', response.data.data.token)
+            _this.user.username = response.data.data.username;
+            _this.user.nickName = response.data.data.nickName;
+            _this.toast("登录成功");
+            sessionStorage.setItem("nickName", _this.user.nickName);
+            _this.$cookies.set("token", response.data.data.token);
             setTimeout(() => {
-              _this.$router.push({ path: '/'})
+              _this.$router.push({ path: "/" });
             }, 1500);
-
           } else {
-            _this.toast(response.data.message)
+            _this.toast(response.data.message);
           }
           // console.log(response)
           // _this.$cookies.set("token", response.data.data.token)
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
-        })
+        });
     },
-    jumpToRegister () {
-      this.$router.push({ path: '/register' })
+    jumpToRegister() {
+      this.$router.push({ path: "/register" });
     }
   }
-}
+};
 </script>
 <style>
 .toast {

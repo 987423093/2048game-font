@@ -10,6 +10,7 @@
             placeholder="选择日期"
             format="yyyy-MM-dd"
             value-format="yyyy-MM-dd"
+            :clearable="false"
           ></el-date-picker>
         </div>
         <!-- <div>{{selectTime}}</div> -->
@@ -121,62 +122,62 @@
         <br />
         <div class="param">
           <div class="leftParam">早饭金额</div>
-          <div class="rightParam">{{xzbill.breakfastPrice}}元</div>
-          <div class="rightParam">{{xybill.breakfastPrice}}元</div>
+          <div class="rightParam">{{xzbill.breakfastPrice}}</div>
+          <div class="rightParam">{{xybill.breakfastPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">午饭金额</div>
-          <div class="rightParam">{{xzbill.lunchPrice}}元</div>
-          <div class="rightParam">{{xybill.lunchPrice}}元</div>
+          <div class="rightParam">{{xzbill.lunchPrice}}</div>
+          <div class="rightParam">{{xybill.lunchPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">晚饭金额</div>
-          <div class="rightParam">{{xzbill.dinnerPrice}}元</div>
-          <div class="rightParam">{{xybill.dinnerPrice}}元</div>
+          <div class="rightParam">{{xzbill.dinnerPrice}}</div>
+          <div class="rightParam">{{xybill.dinnerPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">水果/下午茶</div>
-          <div class="rightParam">{{xzbill.afternoonTeaPrice}}元</div>
-          <div class="rightParam">{{xybill.afternoonTeaPrice}}元</div>
+          <div class="rightParam">{{xzbill.afternoonTeaPrice}}</div>
+          <div class="rightParam">{{xybill.afternoonTeaPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">聚餐/活动</div>
-          <div class="rightParam">{{xzbill.partyActivityPrice}}元</div>
-          <div class="rightParam">{{xybill.partyActivityPrice}}元</div>
+          <div class="rightParam">{{xzbill.partyActivityPrice}}</div>
+          <div class="rightParam">{{xybill.partyActivityPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">夜宵</div>
-          <div class="rightParam">{{xzbill.bedtimeSnackPrice}}元</div>
-          <div class="rightParam">{{xybill.bedtimeSnackPrice}}元</div>
+          <div class="rightParam">{{xzbill.bedtimeSnackPrice}}</div>
+          <div class="rightParam">{{xybill.bedtimeSnackPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">基金定投</div>
-          <div class="rightParam">{{xzbill.aipPrice}}元</div>
-          <div class="rightParam">{{xybill.aipPrice}}元</div>
+          <div class="rightParam">{{xzbill.aipPrice}}</div>
+          <div class="rightParam">{{xybill.aipPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">网购衣物/化妆品/零食等</div>
-          <div class="rightParam">{{xzbill.onlineShoppingPrice}}元</div>
-          <div class="rightParam">{{xybill.onlineShoppingPrice}}元</div>
+          <div class="rightParam">{{xzbill.onlineShoppingPrice}}</div>
+          <div class="rightParam">{{xybill.onlineShoppingPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">其他消费</div>
-          <div class="rightParam">{{xzbill.otherConsumptionPrice}}元</div>
-          <div class="rightParam">{{xybill.otherConsumptionPrice}}元</div>
+          <div class="rightParam">{{xzbill.otherConsumptionPrice}}</div>
+          <div class="rightParam">{{xybill.otherConsumptionPrice}}</div>
         </div>
         <br />
         <div class="param">
           <div class="leftParam">合计</div>
-          <div class="rightParam">{{xzbill.totalPrice}}元</div>
-          <div class="rightParam">{{xybill.totalPrice}}元</div>
+          <div class="rightParam">{{xzTotalPrice}}元</div>
+          <div class="rightParam">{{xyTotalPrice}}元</div>
         </div>
       </div>
     </el-main>
@@ -200,8 +201,7 @@ export default {
         bedtimeSnackPrice: 0.0,
         aipPrice: 0.0,
         onlineShoppingPrice: 0.0,
-        otherConsumptionPrice: 0.0,
-        totalPrice: 0.0
+        otherConsumptionPrice: 0.0
       },
       xybill: {
         // nickName: "小杨",
@@ -213,8 +213,7 @@ export default {
         bedtimeSnackPrice: 0.0,
         aipPrice: 0.0,
         onlineShoppingPrice: 0.0,
-        otherConsumptionPrice: 0.0,
-        totalPrice: 0.0
+        otherConsumptionPrice: 0.0
       },
       xzbillForm: {
         // nickName: "小周",
@@ -226,8 +225,7 @@ export default {
         bedtimeSnackPrice: 0.0,
         aipPrice: 0.0,
         onlineShoppingPrice: 0.0,
-        otherConsumptionPrice: 0.0,
-        totalPrice: 0.0
+        otherConsumptionPrice: 0.0
       },
       xybillForm: {
         // nickName: "小杨",
@@ -239,8 +237,7 @@ export default {
         bedtimeSnackPrice: 0.0,
         aipPrice: 0.0,
         onlineShoppingPrice: 0.0,
-        otherConsumptionPrice: 0.0,
-        totalPrice: 0.0
+        otherConsumptionPrice: 0.0
       },
       selectTime: ""
     };
@@ -398,6 +395,34 @@ export default {
     this.initBillInfo();
     this.$forceUpdate();
   },
+  computed: {
+    xzTotalPrice: function() {
+      return (
+        this.xzbill.breakfastPrice +
+        this.xzbill.lunchPrice +
+        this.xzbill.dinnerPrice +
+        this.xzbill.afternoonTeaPrice +
+        this.xzbill.partyActivityPrice +
+        this.xzbill.bedtimeSnackPrice +
+        this.xzbill.aipPrice +
+        this.xzbill.onlineShoppingPrice +
+        this.xzbill.otherConsumptionPrice
+      );
+    },
+    xyTotalPrice: function() {
+      return (
+        this.xybill.breakfastPrice +
+        this.xybill.lunchPrice +
+        this.xybill.dinnerPrice +
+        this.xybill.afternoonTeaPrice +
+        this.xybill.partyActivityPrice +
+        this.xybill.bedtimeSnackPrice +
+        this.xybill.aipPrice +
+        this.xybill.onlineShoppingPrice +
+        this.xybill.otherConsumptionPrice
+      );
+    }
+  },
   watch: {
     selectTime() {
       this.initBillInfo();
@@ -419,12 +444,14 @@ export default {
   /* float: right; */
   /* flex-direction: row;
   justify-content: space-between; */
+  width: 80px;
 }
 .param {
-  font-size: 7px;
+  font-size: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 22px;
 }
 .el-input :scope {
   width: 80px;
