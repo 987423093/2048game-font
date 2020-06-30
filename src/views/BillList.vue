@@ -397,30 +397,32 @@ export default {
   },
   computed: {
     xzTotalPrice: function() {
-      return (
-        this.xzbill.breakfastPrice +
-        this.xzbill.lunchPrice +
-        this.xzbill.dinnerPrice +
-        this.xzbill.afternoonTeaPrice +
-        this.xzbill.partyActivityPrice +
-        this.xzbill.bedtimeSnackPrice +
-        this.xzbill.aipPrice +
-        this.xzbill.onlineShoppingPrice +
-        this.xzbill.otherConsumptionPrice
-      );
+      let total = 0;
+      total =
+        Number(this.xzbill.breakfastPrice) +
+        Number(this.xzbill.lunchPrice) +
+        Number(this.xzbill.dinnerPrice) +
+        Number(this.xzbill.afternoonTeaPrice) +
+        Number(this.xzbill.partyActivityPrice) +
+        Number(this.xzbill.bedtimeSnackPrice) +
+        Number(this.xzbill.aipPrice) +
+        Number(this.xzbill.onlineShoppingPrice) +
+        Number(this.xzbill.otherConsumptionPrice);
+      return total;
     },
     xyTotalPrice: function() {
-      return (
-        this.xybill.breakfastPrice +
-        this.xybill.lunchPrice +
-        this.xybill.dinnerPrice +
-        this.xybill.afternoonTeaPrice +
-        this.xybill.partyActivityPrice +
-        this.xybill.bedtimeSnackPrice +
-        this.xybill.aipPrice +
-        this.xybill.onlineShoppingPrice +
-        this.xybill.otherConsumptionPrice
-      );
+      let total = 0;
+      total =
+        Number(this.xybill.breakfastPrice) +
+        Number(this.xybill.lunchPrice) +
+        Number(this.xybill.dinnerPrice) +
+        Number(this.xybill.afternoonTeaPrice) +
+        Number(this.xybill.partyActivityPrice) +
+        Number(this.xybill.bedtimeSnackPrice) +
+        Number(this.xybill.aipPrice) +
+        Number(this.xybill.onlineShoppingPrice) +
+        Number(this.xybill.otherConsumptionPrice);
+      return total;
     }
   },
   watch: {

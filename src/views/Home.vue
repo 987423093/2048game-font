@@ -17,6 +17,9 @@
       </div>
       <!-- <el-button type="primary" size="medium" round @click="jumpRank()">排行榜</el-button> -->
       <el-button type="primary" size="medium" :disabled="false" round @click="jumpBill()">账单小应用</el-button>
+      <div>
+        <el-button type="primary" size="medium" round @click="billCalendar()">账单日历</el-button>
+      </div>
     </el-main>
     <div class="toast" v-show="toastShow">{{toastText}}</div>
   </el-container>
@@ -79,16 +82,20 @@ export default {
       } else {
         this.$router.push({ path: "/billList" });
       }
+    },
+    billCalendar() {
+      this.$router.push({ path: "/billCalendar" });
     }
   },
-  created() {},
-  mounted() {
+  created() {
     this.nickName = sessionStorage.getItem("nickName");
     console.log(this.nickName);
     if (this.nickName != null) {
       this.verifyLogin = false;
     }
-    console.log(this.verifyLogin);
+  },
+  mounted() {
+    // console.log(this.verifyLogin);
 
     var _this = this;
     this.axios.post("user/getUserDetail", {}).then(function(response) {

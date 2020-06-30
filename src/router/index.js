@@ -7,6 +7,7 @@ import Login from '../views/Login'
 import Register from '../views/Register'
 import UserInfo from '../views/UserInfo'
 import BillList from '../views/BillList'
+import BillCalendar from '../views/BillCalendar'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -43,6 +44,11 @@ const routes = [{
     path: '/billList',
     name: '账单列表',
     component: BillList
+  },
+  {
+    path: '/billCalendar',
+    name: '账单日历',
+    component: BillCalendar
   }
 ]
 

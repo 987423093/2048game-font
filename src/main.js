@@ -5,6 +5,8 @@ import './plugins/element.js'
 import router from './router'
 import VueTouch from 'vue-touch'
 import VueCookies from 'vue-cookies'
+import Calendar from 'vue-mobile-calendar'
+Vue.use(Calendar)
 Vue.use(VueTouch, {
   name: 'v-touch'
 })
